@@ -12,7 +12,7 @@ const Booking = () => {
     {/* Calendly inline widget features */}
       <div className='calendly-inline-widget d-flex justify-content-center'>
         <InlineWidget
-          url='https://calendly.com/event_types/user/me' 
+          url='https://calendly.com/ishirapt/new-meeting' 
           styles={{height: '100%'}}
           pageSettings={{
             backgroundColor: 'ffffff',
