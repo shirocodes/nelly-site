@@ -9,25 +9,25 @@ const therapyServices = [
   {
     title: 'Play Therapy',
     description: 'Using social interventions to empower children to play and express themselves.',
-    image: {classImg},
+    image: classImg,
     detailsInfo: 'play-therapy'
   },
   {
     title: 'Family-centered intervention',
     description: 'Using social interventions to empower children to play and express themselves.',
-    image: {familyImg},
+    image: familyImg,
     detailsInfo: 'play-therapy'
   },
   {
     title: 'Speech Therapy',
     description: 'Using social interventions to empower children to play and express themselves.',
-    image: {playImg},
+    image: playImg,
     detailsInfo: 'play-therapy'
   },
   {
     title: 'Play Therapy',
     description: 'Using social interventions to empower children to play and express themselves.',
-    image:{homeImg},
+    image:homeImg,
     detailsInfo: 'play-therapy'
   }
 ]

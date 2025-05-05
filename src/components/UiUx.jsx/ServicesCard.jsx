@@ -6,10 +6,14 @@ const ServiceCard = ({title, description, image, detailsInfo}) => {
         <div className="card h-100 shadow-sm border-0"> 
             {image && (
                 <img 
-                    className="card-img-top"
+                    className="card-img-top img-fluid"
                     src={image}
                     alt={title}
-                    style={{objectFit: 'cover', height: '150px'}}
+                    style={{
+                        objectFit: 'cover', 
+                        width: '100%',
+                        aspectRatio: '16/9'
+                    }}
                 />
             )}
 
@@ -24,11 +28,11 @@ const ServiceCard = ({title, description, image, detailsInfo}) => {
                     >
                         Learn More
                     </Link>
-                    <Link 
+                    {/* <Link 
                         to="/book" className="btn btn-outline-secondary btn-sm"
                     >
                         Take Action
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </div>
