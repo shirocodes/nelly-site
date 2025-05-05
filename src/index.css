@@ -3,3 +3,44 @@
     width: 100%;
     height: 400px;
 }
+
+.child-nav, footer {
+    background: linear-gradient(to right, #ffe4e1, #e0f7fa);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+  }
+
+  .child-nav .nav-link {
+    color: #6A5ACD;
+    font-weight: 500;
+    text-decoration: none;
+    
+  }
+  
+  .child-nav .nav-link:hover {
+    color: #483D8B;
+    text-decoration: none;
+  }
+  
+  .child-nav .navbar-brand {
+    color: #FF69B4;
+    font-weight: bold;
+  }
+  
+  .child-nav .navbar-brand:hover {
+    color: #FF1493;
+  }
+  
+  .child-nav .btn-book {
+    display: inline-block;
+    background-color: #B0E0E6;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  
+  .child-nav .btn-book:hover {
+    background-color: #ADD8E6;
+  }

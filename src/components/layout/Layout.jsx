@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 const Layout = ({ children }) => {
   return (
     <>
-      <header className="bg-light border-bottom">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <header 
+        className="bg-light border-bottom"
+        style={{position: 'sticky', top: 0, zIndex: 1030}}
+      >
+        <nav className="navbar navbar-expand-lg child-nav">
           <Link className="navbar-brand p-2" to="/">
             LOGO
           </Link>
@@ -33,7 +36,7 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/book">
+                <Link className="nav-link btn-book" to="/book">
                   Book Now
                 </Link>
               </li>
