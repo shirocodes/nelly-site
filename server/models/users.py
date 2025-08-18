@@ -23,18 +23,6 @@ class User(db.Model, SerializerMixin):
     def check_password(self, password):
         return bcrypt.verify(password, self.password_hash)
 
-    # Optional: convenience constructor for patients or therapists
-    @classmethod
-    def create_patient(cls, name, email, phone_number, password):
-        user = cls(name=name, email=email, phone_number=phone_number, role='patient')
-        user.set_password(password)
-        return user
-
-    @classmethod
-    def create_therapist(cls, name, email, password):
-        user = cls(name=name, email=email, role='therapist')
-        user.set_password(password)
-        return user
     
     def __repr__(self):
         return f'<User id={self.id} username={self.name} role={self.role}>'

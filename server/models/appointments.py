@@ -1,7 +1,9 @@
 from .db import db
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
-from sqlalchemy import Enum as SqlEnum
+from sqlalchemy import Enum 
+from enum import Enum as SqlEnum
+from sqlalchemy import func
 from .users import User
 
 class AppointmentReason(SqlEnum):
@@ -26,11 +28,11 @@ class Appointment(db.Model, SerializerMixin):
     end_time = db.Column(db.DateTime, nullable=False)
 
     child_age = db.Column(db.Integer, nullable=True)
-    reason = db.Column(SqlEnum(AppointmentReason), nullable=False)
+    reason = db.Column(Enum(AppointmentReason), nullable=False)
     notes = db.Column(db.Text, nullable=True)  # extra notes from patient
 
-    status = db.Column(SqlEnum(Schedule), default=Schedule.SCHEDULED, nullable=False)
-    created_at = db.Column(db.DateTime, server_default=db.func.now)
+    status = db.Column(Enum(Schedule), default=Schedule.SCHEDULED, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=func.now())
 
     # Relationships
     patient = db.relationship('User', foreign_keys=[patient_id], backref='appointments_as_patient', lazy='joined')
