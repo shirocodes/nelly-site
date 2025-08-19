@@ -6,7 +6,7 @@ from .db import db
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
     
-    serialize_rules = ('-password_hash')
+    serialize_rules = ('-password_hash',)
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
@@ -26,3 +26,13 @@ class User(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<User id={self.id} username={self.name} role={self.role}>'
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "phone_number": self.phone_number,
+            "role": self.role,
+            "created_at": self.created_at.isoformat()
+        }

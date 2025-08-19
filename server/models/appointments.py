@@ -1,10 +1,8 @@
 from .db import db
 from sqlalchemy_serializer import SerializerMixin
-from datetime import datetime
 from sqlalchemy import Enum 
 from enum import Enum as SqlEnum
 from sqlalchemy import func
-from .users import User
 
 class AppointmentReason(SqlEnum):
     ASSESSMENT = "Assessment"
@@ -19,6 +17,9 @@ class Schedule(SqlEnum):
     
 class Appointment(db.Model, SerializerMixin): 
     __tablename__ = 'appointments'
+    
+    serialize_rules = ('-patient.password_hash', '-therapist.password_hash',)
+
     
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -40,3 +41,45 @@ class Appointment(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Appointment: id={self.id}, patient={self.patient_id}, therapist={self.therapist_id}, (from {self.start_time} to {self.end_time})>'
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "patient_id": self.patient_id,
+            "therapist_id": self.therapist_id,
+            "start_time": self.start_time.isoformat(),
+            "end_time": self.end_time.isoformat(),
+            "child_age": self.child_age,
+            "reason": self.reason.value,  # Use human-readable value (e.g., "Assessment")
+            "notes": self.notes,
+            "status": self.status.value,
+            "created_at": self.created_at.isoformat()
+        }
+    
+    def to_patient_view_dict(self):
+        """For therapists: show patient details + appointment info"""
+        return {
+            "id": self.id,
+            "start_time": self.start_time.isoformat(),
+            "end_time": self.end_time.isoformat(),
+            "child_age": self.child_age,
+            "reason": self.reason.value,
+            "notes": self.notes,
+            "status": self.status.value,
+            "created_at": self.created_at.isoformat(),
+            "patient": self.patient.to_dict() if self.patient else None
+        }
+
+    def to_therapist_view_dict(self):
+        """For patients: show therapist details + appointment info"""
+        return {
+            "id": self.id,
+            "start_time": self.start_time.isoformat(),
+            "end_time": self.end_time.isoformat(),
+            "child_age": self.child_age,
+            "reason": self.reason.value,
+            "notes": self.notes,
+            "status": self.status.value,
+            "created_at": self.created_at.isoformat(),
+            "therapist": self.therapist.to_dict() if self.therapist else None
+        }
