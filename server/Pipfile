@@ -9,6 +9,10 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+sqlalchemy-serializer = "*"
+passlib = "*"
+flask-migrate = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
