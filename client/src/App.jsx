@@ -1,12 +1,15 @@
 import React from 'react'
+import { AuthProvider } from './context/AuthContext'
 import AppRouter from './routes/AppRouter'
 import Layout from './components/layout/Layout'
 
 const App = () => {
   return (
-    <Layout>
-      <AppRouter />
-    </Layout>  
+    <AuthProvider>
+      <Layout>
+        <AppRouter />
+      </Layout> 
+    </AuthProvider> 
   )
 }
 
