@@ -16,7 +16,7 @@ const BookingDetailsForm = ({ therapistId, date, selectedSlot, childAge, setChil
 
       <div className="mt-3">
         <div className="mb-2">
-          <label>Child Age (optional)</label>
+          <label>Child Age</label>
           <input type="number" className="form-control" value={childAge} onChange={(e) => setChildAge(e.target.value)} />
         </div>
 
@@ -35,9 +35,24 @@ const BookingDetailsForm = ({ therapistId, date, selectedSlot, childAge, setChil
       </div>
 
       {postError && <div className="alert alert-danger mt-2">{postError}</div>}
-      <button className="btn btn-success" onClick={handleBooking} disabled={posting}>
-        {posting ? "Booking..." : "Confirm Booking"}
-      </button>
+       {/* --- Dual-action buttons --- */}
+          <div className="d-flex flex-column flex-md-row gap-2 justify-content-end mt-3">
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={() => window.location.href = "/#services"}
+            >
+              ← Back to Services
+            </button>
+
+            <button
+              className="btn btn-success"
+              onClick={handleBooking}
+              disabled={posting}
+            >
+              {posting ? "Booking..." : "Confirm Booking"}
+            </button>
+          </div>
     </div>
   );
 };

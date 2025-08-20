@@ -4,7 +4,6 @@ import { getBookedSlots, createAppointment } from "../apis/Appointments"
 import {AuthContext} from '../context/AuthContext'
 import { toYMD, generateSlots, normalizeBooked, overlaps } from "../utilities/DateHelpers"
 
-
 import TherapistDatePicker from "../components/bookings/TherapistDatePicker"
 import SlotSelector from "../components/bookings/SlotSelector"
 import BookingDetailsForm from "../components/bookings/BookingDetailsForm"
@@ -94,7 +93,7 @@ const BookingPage = () => {
       });
 
       // success → redirect
-      navigate("/account/appointments", { replace: true });
+      navigate("/account", { replace: true });
     } catch (err) {
     
       if (err.response) {
@@ -110,42 +109,70 @@ const BookingPage = () => {
   }
 
   return (
-    <div className="container my-4">
-      <h2 className="mb-3">Book an Appointment</h2>
+    <div className="container my-4 d-flex justify-content-center">
+      <div
+        className="card shadow-lg p-4 p-md-5 rounded-6 border-0" 
+        style={{
+          maxWidth: '900px',
+          background: 'linear-gradient(145deg, #e0f7fa,rgb(83, 116, 85))',
+          boxShadow: '0 0 20px rgba(0, 150, 136, 0.4), 0 0 40px rgba(0, 150, 136, 0.2)',
+        }}
+      >
+        {/* Back button */}
+        <button
+          type="button"
+          className="position-absolute top-0 start-0 translate-middle-y m-3 d-flex align-items-center justify-content-center rounded-circle border-0"
+          style={{
+            width: "35px",
+            height: "35px",
+            background: "#ffffffcc",
+            color: "#00796b",
+            fontSize: "30px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/#services")} // anchor to services section
+        >
+          ← 
+        </button>
+        <h2 className="mb-4 text-center fw-bold" style={{ fontFamily: "'Nunito', sans-serif", color: "#00796b" }}>
+          Book an Appointment
+        </h2>
 
-      <TherapistDatePicker
-        therapistId={therapistId} setTherapistId={setTherapistId}
-        date={date} setDate={setDate}
-        workStartHour={workStartHour} setWorkStartHour={setWorkStartHour}
-        workEndHour={workEndHour} setWorkEndHour={setWorkEndHour}
-      />
-
-      <div className="mt-3">
-        {loading && <div className="alert alert-secondary">Loading booked slots…</div>}
-        {fetchError && <div className="alert alert-danger">{fetchError}</div>}
-      </div>
-
-      {therapistId && !loading && (
-        <SlotSelector
-          slots={slots}
-          isSlotBooked={isSlotBooked}
-          selectedSlot={selectedSlot}
-          setSelectedSlot={setSelectedSlot}
-          date={date}
+        <TherapistDatePicker
+          therapistId={therapistId} setTherapistId={setTherapistId}
+          date={date} setDate={setDate}
+          // workStartHour={workStartHour} setWorkStartHour={setWorkStartHour}
+          // workEndHour={workEndHour} setWorkEndHour={setWorkEndHour}
         />
-      )}
 
-      <BookingDetailsForm
-        therapistId={therapistId}
-        date={date}
-        selectedSlot={selectedSlot}
-        childAge={childAge} setChildAge={setChildAge}
-        reason={reason} setReason={setReason}
-        notes={notes} setNotes={setNotes}
-        postError={postError}
-        posting={posting}
-        handleBooking={handleBooking}
-      />
+        <div className="mt-3">
+          {loading && <div className="alert alert-secondary">Loading booked slots…</div>}
+          {fetchError && <div className="alert alert-danger">{fetchError}</div>}
+        </div>
+
+        {therapistId && !loading && (
+          <SlotSelector
+            slots={slots}
+            isSlotBooked={isSlotBooked}
+            selectedSlot={selectedSlot}
+            setSelectedSlot={setSelectedSlot}
+            date={date}
+          />
+        )}
+
+        <BookingDetailsForm
+          therapistId={therapistId}
+          date={date}
+          selectedSlot={selectedSlot}
+          childAge={childAge} setChildAge={setChildAge}
+          reason={reason} setReason={setReason}
+          notes={notes} setNotes={setNotes}
+          postError={postError}
+          posting={posting}
+          handleBooking={handleBooking}
+        />
+      </div>
     </div>
   );
 };
