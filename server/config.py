@@ -9,9 +9,8 @@ if db_url and db_url.startswith("postgres://"):
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "default_secret")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
-    SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "default-jwt-secret")
     
+    # Use the corrected db_url here!
+    SQLALCHEMY_DATABASE_URI = db_url
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -29,6 +29,10 @@ def create_app():
     @app.route('/')
     def home():
         return {"message": "Backend is running!"}
+    
+    @app.route("/test-db")
+    def test_db():
+        return f"Database URL: {app.config['SQLALCHEMY_DATABASE_URI']}"
 
     return app
 
