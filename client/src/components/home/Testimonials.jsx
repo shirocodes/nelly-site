@@ -16,6 +16,18 @@ const testimonials = [
   {
     name: "Aisha, Guardian",
     feedback: "The personalized care and attention exceeded our expectations. My niece looks forward to every session."
+  },
+  {
+    name: "David, Teacher",
+    feedback: "I've seen positive changes in my student’s focus and participation in class since starting therapy."
+  },
+  {
+    name: "Fatma, Aunt",
+    feedback: "The team explained everything clearly and gave us tools to support our child at home as well."
+  },
+  {
+    name: "James, Parent",
+    feedback: "We feel hopeful again. The support has been consistent, professional, and very encouraging."
   }
 ]
 
