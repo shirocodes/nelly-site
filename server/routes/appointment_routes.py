@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.appointments import Appointment, AppointmentReason, Schedule
 from models.db import db
 from utils.auth import role_required
-from datetime import datetime
+from datetime import datetime, timedelta
 
 appointment_bp = Blueprint("appointments", __name__, url_prefix="/appointments")
 
@@ -13,6 +13,43 @@ def parse_identity():
     user_id, role = identity.split(":")
     return int(user_id), role
 
+# Get booked slots for a therapist
+@appointment_bp.route("/therapist/<int:therapist_id>/booked-slots", methods=["GET"])
+@jwt_required()
+def get_booked_slots(therapist_id):
+    try:
+        # Optional filters for a specific date or range
+        start_date = request.args.get("start_date")  # e.g. "2025-08-20"
+        end_date = request.args.get("end_date")      # e.g. "2025-08-25"
+
+        query = Appointment.query.filter_by(
+            therapist_id=therapist_id,
+            status=Schedule.SCHEDULED
+        )
+
+        if start_date:
+            start_dt = datetime.fromisoformat(start_date)
+            query = query.filter(Appointment.start_time >= start_dt)
+
+        if end_date:
+            end_dt = datetime.fromisoformat(end_date)
+            query = query.filter(Appointment.end_time <= end_dt)
+
+        appointments = query.all()
+
+        booked_slots = [
+            {
+                "start_time": appt.start_time.isoformat(),
+                "end_time": appt.end_time.isoformat()
+            }
+            for appt in appointments
+        ]
+
+        return jsonify({"therapist_id": therapist_id, "booked_slots": booked_slots}), 200
+
+    except Exception as e:
+        return jsonify({"msg": "Failed to fetch booked slots", "error": str(e)}), 500
+    
 #  Create appointment (patient only) 
 @appointment_bp.route("/", methods=["POST"])
 @jwt_required()

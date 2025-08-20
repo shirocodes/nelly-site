@@ -55,28 +55,6 @@ def login():
     except Exception as e:
         return jsonify({"msg": "Login failed", "error": str(e)}), 500
 
-#protected route
-@auth_bp.route("/me", methods=["GET"])
-@jwt_required()
-def get_profile():
-    try:
-        identity = get_jwt_identity()
-        user_id, role = identity.split(":")
-        user = User.query.get(user_id)
-        if not user:
-            return jsonify({"msg": "User not found"}), 404
-
-        return jsonify({
-            "id": user.id,
-            "name": user.name,
-            "email": user.email,
-            "phone_number": user.phone_number,
-            "role": user.role
-        })
-
-    except Exception as e:
-        return jsonify({"msg": "Failed to fetch profile", "error": str(e)}), 500
-
 @auth_bp.route("/logout", methods=["POST"])
 @jwt_required()
 def logout():
