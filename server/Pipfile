@@ -13,6 +13,7 @@ sqlalchemy-serializer = "*"
 passlib = "*"
 flask-migrate = "*"
 flask-jwt-extended = "*"
+gunicorn = "*"
 
 [dev-packages]
 
