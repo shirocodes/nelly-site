@@ -1,9 +1,3 @@
-.calendly-inline-widget {
-    min-width: 300px;
-    width: 100%;
-    height: 400px;
-}
-
 .child-nav, footer {
     background: linear-gradient(to right, #ffe4e1, #e0f7fa);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

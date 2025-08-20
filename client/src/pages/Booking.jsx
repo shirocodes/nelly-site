@@ -7,6 +7,7 @@ import { toYMD, generateSlots, normalizeBooked, overlaps } from "../utilities/Da
 import TherapistDatePicker from "../components/bookings/TherapistDatePicker"
 import SlotSelector from "../components/bookings/SlotSelector"
 import BookingDetailsForm from "../components/bookings/BookingDetailsForm"
+import { FaArrowLeft } from "react-icons/fa";
 
 const normalizeReason = (r) =>
   r.trim().replace(" ", "_").replace("-", "_").toUpperCase();
@@ -118,22 +119,13 @@ const BookingPage = () => {
           boxShadow: '0 0 20px rgba(0, 150, 136, 0.4), 0 0 40px rgba(0, 150, 136, 0.2)',
         }}
       >
-        {/* Back button */}
+      {/* Back button */}
         <button
-          type="button"
-          className="position-absolute top-0 start-0 translate-middle-y m-3 d-flex align-items-center justify-content-center rounded-circle border-0"
-          style={{
-            width: "35px",
-            height: "35px",
-            background: "#ffffffcc",
-            color: "#00796b",
-            fontSize: "30px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/#services")} // anchor to services section
+            className="btn btn-link position-absolute"
+            style={{ top: "8px", left: "8px", color: "#3a6ea5" }}
+            onClick={() => navigate("/services")}
         >
-          ← 
+            <FaArrowLeft size={15} />
         </button>
         <h2 className="mb-4 text-center fw-bold" style={{ fontFamily: "'Nunito', sans-serif", color: "#00796b" }}>
           Book an Appointment
