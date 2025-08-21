@@ -32,20 +32,6 @@ const AccountPage = () => {
 
         <div className="list-group">
           <Link
-            to="/account/profile"
-            className="list-group-item list-group-item-action"
-            style={{
-              borderRadius: "8px",
-              marginBottom: "12px",
-              textAlign: "center",
-              fontWeight: "500",
-              color: "#3a6ea5",
-            }}
-          >
-            Manage Profile
-          </Link>
-
-          <Link
             to="/account/appointments"
             className="list-group-item list-group-item-action"
             style={{
@@ -56,6 +42,19 @@ const AccountPage = () => {
             }}
           >
             My Appointments
+          </Link>
+          <Link
+            to="/account/profile"
+            className="list-group-item list-group-item-action"
+            style={{
+              borderRadius: "8px",
+              marginBottom: "12px",
+              textAlign: "center",
+              fontWeight: "500",
+              color: "#3a6ea5",
+            }}
+          >
+            Edit Profile
           </Link>
         </div>
       </div>

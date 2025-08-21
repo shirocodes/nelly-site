@@ -45,7 +45,23 @@ const MyAppointments = () => {
         </h3>
 
         {appointments.length === 0 ? (
-          <p className="text-center text-muted">No appointments yet.</p>
+          <div className="text-center">
+            <p className="text-muted mb-3">You don't have any appointments yet.</p>
+            <button
+              className="btn btn-lg px-4"
+              style={{
+                borderRadius: "20px",
+                fontWeight: "500",
+                background: "linear-gradient(135deg,rgb(162, 221, 218),rgb(51, 87, 126))",
+                border: "none",
+                color: "white",
+                boxShadow: "0 3px 8px rgba(58,110,165,0.3)", // subtle blue shadow
+              }}
+              onClick={() => navigate("/book")}
+            >
+              Set Up Appointment
+            </button>
+          </div>
         ) : (
           <div className="list-group">
             {appointments.map((appt) => (
