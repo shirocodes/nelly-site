@@ -6,6 +6,8 @@ const API = axios.create({
   headers: { "Content-Type": "application/json" }
 });
 
+console.log("API URL:", process.env.REACT_APP_API_URL);
+
 // Attach JWT token if available
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token"); // you save token after login/register

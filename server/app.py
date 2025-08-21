@@ -13,7 +13,11 @@ def create_app():
     app = Flask(__name__, instance_relative_config=True)
     
     app.config.from_object(Config)
-    CORS(app, supports_credentials=True)
+    CORS(app, resources={r"/*": {"origins": [
+        "http://localhost:5173",          # local dev
+        "https://littlepuzzles.vercel.app" # deployed frontend
+    ]}}, supports_credentials=True)
+
     
     db.init_app(app)
     migrate.init_app(app, db)
